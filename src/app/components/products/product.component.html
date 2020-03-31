@@ -1,1 +1,9 @@
-<p>product works!</p>
+<div *ngFor="let product of products$ | async" >Product: {{ product.name }}</div>
+
+<div *ngIf="loading$ | async; let loading" >
+  <div *ngIf="loading" >Loading...</div>
+</div>
+
+<div *ngIf="error$ | async; let error" >
+  <div *ngIf="error" >{{ error }}</div>
+</div>
