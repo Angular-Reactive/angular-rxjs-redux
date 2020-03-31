@@ -16,19 +16,19 @@ const initialState: ProductState = {
 export function productReducer(state = initialState, action: fromProduct.ProductActions): ProductState {
 
   switch (action.type) {
-    case fromProduct.ActionTypes.FETCHING_PRODUCTS_REQUEST:
+    case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_REQUEST:
       return {
         ...state,
         loading: true
       };
 
-    case fromProduct.ActionTypes.FETCHING_PRODUCTS_SUCCESS:
+    case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_SUCCESS:
       return {
         ...state,
         list: action.products
       };
 
-    case fromProduct.ActionTypes.FETCHING_PRODUCTS_FAILURE:
+    case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_FAILURE:
       return {
         ...state,
         error: action.error
