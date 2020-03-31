@@ -38,3 +38,8 @@ export function productReducer(state = initialState, action: fromProduct.Product
       return state;
   }
 }
+
+// State property selectors - pure functions
+export const getProductsEntities = (state: ProductState) => state.list;
+export const getProductsLoading = (state: ProductState) => state.loading;
+export const getProductsError = (state: ProductState) => state.error;
