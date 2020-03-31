@@ -17,13 +17,10 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
-  product$: Observable<Product[]>;
+  product$;
 
-  constructor(private productActions: ProductActions,
-              private selectors: ProductSelectors) {
+  constructor() {
 
-    this.productActions.loadProductsRequest({name: 'Coco'});
-    this.product$ = this.selectors.selectProducts();
   }
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');

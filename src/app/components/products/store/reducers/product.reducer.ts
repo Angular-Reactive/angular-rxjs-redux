@@ -1,38 +1,40 @@
-import { ProductActions } from './../actions/product.actions';
 import { Product } from './../../model/product.model';
-import { Action, isAction } from '../../../../store/state';
+import * as fromProduct from '../actions/product.actions';
 
 export interface ProductState {
-  products: Product[];
+  loading: boolean;
+  list: Array<Product>;
+  error: string;
 }
 
-export const initialState: ProductState = {
-  products: []
+const initialState: ProductState = {
+  loading: false;
+  list: [{ name: 'init' }],
+  error: void 0 // 'void 0' returns undefined
 };
 
-export function reducer(state = initialState, action: Action<any>) {
+export function productReducer(state = initialState, action: fromProduct.ProductActions): ProductState {
 
-  if (isAction(action, ProductActions.LoadProductsRequest)) {
-    return state;
+  switch (action.type) {
+    case fromProduct.ActionTypes.FETCHING_PRODUCTS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case fromProduct.ActionTypes.FETCHING_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        list: action.products
+      };
+
+    case fromProduct.ActionTypes.FETCHING_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+
+    default:
+      return state;
   }
-
-  if (isAction(action, ProductActions.LoadProductsSuccess)) {
-    const products = [...action.payload];
-
-    return {
-      ...state,
-      products
-    };
-  }
-
-  if (isAction(action, ProductActions.LoadProductsFailure)) {
-    const products = [];
-
-    return {
-      ...state,
-      products
-    };
-  }
-
-  return state;
 }
