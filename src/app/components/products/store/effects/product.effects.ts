@@ -4,8 +4,9 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { Injectable } from '@angular/core';
+import { switchMap, delay, map, catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, delay, map, catchError } from 'rxjs/operators';
+import { Product } from '../../model/product.model';
 
 // The effect is just a class decorated with the @Injectable decorator.
 // It also contains two members: one member of 'Actions' type and another
@@ -21,19 +22,14 @@ export class ProductEffects {
               private http: HttpClient) {}
 
   @Effect()
-  products$: Observable<Action> = this.actions$.pipe(
-    // ensures we set ourselves up to listen to a specific dispatchet action
+  products$ = this.actions$.pipe(
     ofType(fromProduct.ProductActionTypes.FETCHING_PRODUCTS_REQUEST),
-
-    // The call to switchMap ensures we are able to take the current Observable
-    // that wer are currently on, and turn it into something completely different,
-    // such as a call to an AJAX service.
     switchMap(() =>
-      ajax.getJSON('data/products.json').pipe(
+      this.http.get('../../../../../assets/data/products.json').pipe(
         delay(3000),
-        map(payload => new fromProduct.ProductsFetchSuccessfullyAction()),
+        map((payload: Product []) => new fromProduct.ProductsFetchSuccessfullyAction(payload)),
         catchError(err => of(new fromProduct.ProductsFetchErrorAction(err))
-      )
-    )
-  );
+      ))
+  ));
+
 }

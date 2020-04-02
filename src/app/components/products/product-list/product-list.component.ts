@@ -2,6 +2,8 @@
 // This component just get a list assigned to it.
 
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from '../model/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  @Input() products;
+  @Input() products: Observable<Product []>;
 
   constructor() { }
 

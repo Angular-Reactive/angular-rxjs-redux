@@ -4,9 +4,7 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  template: `<app-counter></app-counter>><br><br>
-  <app-jedi-list></app-jedi-list>
-  <app-counter-list></app-counter-list>`,
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {

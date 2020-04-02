@@ -1,1 +1,1 @@
-<div *ngFor="let product of products">{{ product.name }}</div>
+<div *ngFor="let product of products | async" >Product: {{ product.name }}</div>

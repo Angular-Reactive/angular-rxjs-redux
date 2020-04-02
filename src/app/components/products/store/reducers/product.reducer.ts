@@ -8,8 +8,8 @@ export interface ProductState {
 }
 
 const initialState: ProductState = {
-  loading: false;
-  list: [{ name: 'init' }],
+  loading: false,
+  list: [],
   error: void 0 // 'void 0' returns undefined
 };
 
@@ -25,13 +25,15 @@ export function productReducer(state = initialState, action: fromProduct.Product
     case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_SUCCESS:
       return {
         ...state,
-        list: action.products
+        list: action.payload,
+        loading: false
       };
 
     case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_FAILURE:
       return {
         ...state,
-        error: action.error
+        error: action.payload,
+        loading: false
       };
 
     default:
