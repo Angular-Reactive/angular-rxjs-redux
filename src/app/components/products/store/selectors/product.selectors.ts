@@ -8,6 +8,6 @@
 import { createSelector } from '@ngrx/store';
 import { getFeatureProductsState } from '../index';
 
-export const getProductsList = createSelector(getFeatureProductsState, (state)=> state.products.list);
-export const isLoading = createSelector(getFeatureProductsState, (state)=> state.products.loading);
-export const getProductsError = createSelector(getFeatureProductsState, (state)=> state.products.error);
+export const getProductsList = createSelector(getFeatureProductsState, (state) => state.products.list);
+export const isLoading = createSelector(getFeatureProductsState, (state) => state.products.loading);
+export const getProductsError = createSelector(getFeatureProductsState, (state) => state.products.error);
