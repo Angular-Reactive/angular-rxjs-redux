@@ -13,10 +13,15 @@ const initialState: ProductState = {
   error: void 0 // 'void 0' returns undefined
 };
 
+function addProduct(list, product) {
+  return [...list, product];
+}
+
 export function productReducer(state = initialState, action: fromProduct.ProductActions): ProductState {
 
   switch (action.type) {
     case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_REQUEST:
+    case fromProduct.ProductActionTypes.ADD_PRODUCT_REQUEST:
       return {
         ...state,
         loading: true
@@ -29,12 +34,20 @@ export function productReducer(state = initialState, action: fromProduct.Product
         loading: false
       };
 
-    case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_FAILURE:
+    case fromProduct.ProductActionTypes.ADD_PRODUCT_SUCCESS:
       return {
         ...state,
-        error: action.payload,
+        list: addProduct(state.list, action.payload),
         loading: false
       };
+
+    case fromProduct.ProductActionTypes.FETCHING_PRODUCTS_FAILURE:
+      case fromProduct.ProductActionTypes.ADD_PRODUCT_FAILURE:
+        return {
+          ...state,
+          error: action.payload,
+          loading: false
+        };
 
     default:
       return state;

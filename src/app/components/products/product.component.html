@@ -2,10 +2,21 @@
   <div *ngIf="loading">Loading...</div>
 </div>
 
-<div>
-  <app-product-list [products]="products$"></app-product-list>
-</div>
+<br>
 
 <div *ngIf="error$ | async; let error" >
   <div *ngIf="error" >{{ error['message'] }}</div>
 </div>
+
+<div>
+  <input [(ngModel)]="newProduct" type="text" placeholder="New product...">
+  <button (click)="addNewProduct()">Add new product</button>
+</div>
+
+<br><br>
+
+<div>
+  <app-product-list [products]="products$"></app-product-list>
+</div>
+
+

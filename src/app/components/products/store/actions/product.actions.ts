@@ -5,7 +5,10 @@ import { Injectable } from '@angular/core';
 export enum ProductActionTypes {
   FETCHING_PRODUCTS_REQUEST = '[Product] Fetching products request',
   FETCHING_PRODUCTS_SUCCESS = '[Product] Fetching products success',
-  FETCHING_PRODUCTS_FAILURE = '[Product] Fetching products failure'
+  FETCHING_PRODUCTS_FAILURE = '[Product] Fetching products failure',
+  ADD_PRODUCT_REQUEST = '[Product] Add product request',
+  ADD_PRODUCT_SUCCESS = '[Product] Add product success',
+  ADD_PRODUCT_FAILURE = '[Product] Add product failure'
 }
 
 export class ProductsRequestAction implements Action {
@@ -34,6 +37,36 @@ export class ProductsFetchErrorAction implements Action {
   }
 }
 
+export class AdProductRequestAction implements Action {
+  readonly type = ProductActionTypes.ADD_PRODUCT_REQUEST;
+  readonly payload: Product;
+
+  constructor(public product: Product) {
+    this.payload = product;
+  }
+}
+
+export class AddProductSuccessfullyAction implements Action {
+  readonly type = ProductActionTypes.ADD_PRODUCT_SUCCESS;
+  readonly payload: Product;
+
+  constructor(public product?: Product) {
+    this.payload = product;
+  }
+}
+
+export class AddProductErrorAction implements Action {
+  readonly type = ProductActionTypes.ADD_PRODUCT_FAILURE;
+  readonly payload: string;
+
+  constructor(public error: string) {
+    this.payload = error;
+  }
+}
+
 export type ProductActions = ProductsRequestAction |
                               ProductsFetchSuccessfullyAction |
-                              ProductsFetchErrorAction;
+                              ProductsFetchErrorAction |
+                              AdProductRequestAction |
+                              AddProductSuccessfullyAction |
+                              AddProductErrorAction;

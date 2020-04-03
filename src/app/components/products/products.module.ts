@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // Components
 import { ProductListComponent } from './product-list/product-list.component';
@@ -17,8 +18,9 @@ import { productReducers } from './store/index';
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductCreateComponent],
   imports: [
-    CommonModule,
+  CommonModule,
     HttpClientModule,
+    FormsModule,
     StoreModule.forFeature('products', productReducers),
     EffectsModule.forFeature([ProductEffects])
   ],

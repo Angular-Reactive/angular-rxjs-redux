@@ -22,7 +22,7 @@ export class ProductEffects {
               private http: HttpClient) {}
 
   @Effect()
-  products$ = this.actions$.pipe(
+  getProducts$ = this.actions$.pipe(
     ofType(fromProduct.ProductActionTypes.FETCHING_PRODUCTS_REQUEST),
     switchMap(() =>
       this.http.get('../../../../../assets/data/products.json').pipe(
@@ -32,4 +32,13 @@ export class ProductEffects {
       ))
   ));
 
+  @Effect()
+  addProduct$ = this.actions$.pipe(
+    ofType(fromProduct.ProductActionTypes.ADD_PRODUCT_REQUEST),
+    switchMap((action: fromProduct.AdProductRequestAction) =>
+      this.http.post('products/', action.payload).pipe(
+        map((payload: Product) => new fromProduct.AddProductSuccessfullyAction(payload)),
+        catchError(err => of(new fromProduct.AddProductErrorAction(err)))
+      ))
+  );
 }
