@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state/app-state';
 import * as fromUserSelectors from './store/selectors/user.selectors';
-import { map } from 'rxjs/operators';
+import * as fromUserActions from './store/actions/user.actions';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',
@@ -10,6 +11,9 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+
+  user: string;
+  id = 1;
 
   // Getting the entities dictionary as a list
   users$ = this.store.select(fromUserSelectors.getUsers).pipe(
@@ -23,6 +27,16 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addUser() {
+    const newUser = {
+      id: this.id++,
+      name: this.user
+    };
+
+    this.store.dispatch(new fromUserActions.AddUserAction(newUser));
+    this.user = '';
+  }
+z
   toArray(obj) {
     const keys = Object.keys(obj);
     return keys.map(key => obj[key]);

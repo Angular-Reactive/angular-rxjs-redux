@@ -53,3 +53,13 @@ It means that this function give us a slice of state.
 ## index.ts
 It's like a public API for our feature state that re-exports everything we want to expose to our parts of out Angular application.
 Having an 'index.ts' file helps other developers know what they should be ablle to access from this module.
+
+## Setting up @ngrx/entity steps
+
+# npm i @ngrx/entity
+
+# 1) Create a model
+# 2) Create an entity state based on the model
+# 1) Create an entity adapter
+# 1) Create the initial state
+# 1) Create the reducer and set up the state in the StoreModule

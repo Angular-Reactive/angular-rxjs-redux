@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
 
 // Store
 import { userReducers } from './store/index';
@@ -11,7 +12,8 @@ import { UserComponent } from './user.component';
   declarations: [UserComponent],
   imports: [
   CommonModule,
-    StoreModule.forFeature('user', userReducers)
+  FormsModule,
+  StoreModule.forFeature('user', userReducers)
   ],
   exports: [UserComponent]
 })

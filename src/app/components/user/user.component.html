@@ -1,2 +1,8 @@
 <div style="border: solid 1px black; padding: 10px;"
-    *ngFor="let user of users$ | async" >{{ user.name }}</div>
+    *ngFor="let user of users$ | async" >{{ user.name }}
+</div>
+
+<div>
+  <input [(ngModel)]="user" type="text">
+  <button (click)="addUser()">Add</button>
+</div>
