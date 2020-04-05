@@ -39,8 +39,11 @@ export class UserComponent implements OnInit {
   }
 
   onUpdateUser(user: User) {
-    console.log('Updating:', user);
     this.store.dispatch(new fromUserActions.UpdateUserAction(user));
+  }
+
+  onDeleteUser(id: number) {
+    this.store.dispatch(new fromUserActions.DeleteUserAction({id}));
   }
 
   toArray(obj) {

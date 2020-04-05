@@ -37,6 +37,9 @@ export function userReducer(state = initial, action: ActionPayload<User>): State
       },
       state);
 
+    case fromUser.UserActionTypes.DELETE_USER:
+      return userAdapter.removeOne(action.payload.id, state);
+
     default:
       return state;
   }

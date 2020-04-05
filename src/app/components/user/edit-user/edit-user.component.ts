@@ -8,7 +8,7 @@ import { User } from '../model/user.model';
 })
 export class EditUserComponent implements OnInit {
 
-  private _user;
+  private _user: User;
 
   @Input()
   get user() {
@@ -22,6 +22,9 @@ export class EditUserComponent implements OnInit {
   @Output()
   update = new EventEmitter<User>();
 
+  @Output()
+  delete = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -29,6 +32,10 @@ export class EditUserComponent implements OnInit {
 
   updateUser() {
     this.update.emit(this._user);
+  }
+
+  deleteUser() {
+    this.delete.emit(this._user.id);
   }
 
 }
