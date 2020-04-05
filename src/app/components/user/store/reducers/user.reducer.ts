@@ -30,6 +30,13 @@ export function userReducer(state = initial, action: ActionPayload<User>): State
     case fromUser.UserActionTypes.ADD_USER:
       return userAdapter.addOne(action.payload, state);
 
+    case fromUser.UserActionTypes.UPDATE_USER:
+      return userAdapter.updateOne({
+        id: action.payload.id,
+        changes: action.payload
+      },
+      state);
+
     default:
       return state;
   }

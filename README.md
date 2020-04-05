@@ -63,3 +63,13 @@ Having an 'index.ts' file helps other developers know what they should be ablle 
 # 1) Create an entity adapter
 # 1) Create the initial state
 # 1) Create the reducer and set up the state in the StoreModule
+
+## Function to convert the entity's entities dictionary in a list
+
+```
+  toArray(obj) {
+    const keys = Object.keys(obj);
+    return keys.map(key => obj[key]);
+  }
+  
+```

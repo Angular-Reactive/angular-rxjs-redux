@@ -4,6 +4,7 @@ import { AppState } from 'src/app/store/state/app-state';
 import * as fromUserSelectors from './store/selectors/user.selectors';
 import * as fromUserActions from './store/actions/user.actions';
 import { map, tap } from 'rxjs/operators';
+import { User } from './model/user.model';
 
 @Component({
   selector: 'app-user',
@@ -36,7 +37,12 @@ export class UserComponent implements OnInit {
     this.store.dispatch(new fromUserActions.AddUserAction(newUser));
     this.user = '';
   }
-z
+
+  onUpdateUser(user: User) {
+    console.log('Updating:', user);
+    this.store.dispatch(new fromUserActions.UpdateUserAction(user));
+  }
+
   toArray(obj) {
     const keys = Object.keys(obj);
     return keys.map(key => obj[key]);

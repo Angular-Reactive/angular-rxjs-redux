@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 // Store
 import { userReducers } from './store/index';
 import { UserComponent } from './user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UserComponent, EditUserComponent],
   imports: [
   CommonModule,
   FormsModule,

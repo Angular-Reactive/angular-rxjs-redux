@@ -1,5 +1,7 @@
 <div style="border: solid 1px black; padding: 10px;"
-    *ngFor="let user of users$ | async" >{{ user.name }}
+    *ngFor="let user of users$ | async" >
+    {{ user.name }}
+    <app-edit-user [user]="user" (update)="onUpdateUser($event)"></app-edit-user>
 </div>
 
 <div>
