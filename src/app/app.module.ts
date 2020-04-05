@@ -10,6 +10,7 @@ import { storeFreeze} from 'ngrx-store-freeze';
 import { ProductsModule } from './components/products/products.module';
 import { CounterModule } from './components/counter/counter.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { UserModule } from './components/user/user.module';
 
 // Components
 import { AppComponent } from './app.component';
@@ -33,7 +34,8 @@ BrowserModule,
     EffectsModule.forRoot([]),
     JediModule,
     CounterModule,
-    ProductsModule
+    ProductsModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
