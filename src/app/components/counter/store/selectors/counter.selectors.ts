@@ -1,10 +1,16 @@
-import { AppState } from 'src/app/store/state/app-state';
+import { AppState } from 'src/app/store/state';
 import { createSelector } from '@ngrx/store';
+import { getAllCounterState } from '../reducers/index';
+import { CounterState } from '../../store/reducers/index';
+import * as fromCounter from '../reducers/counter.reducer';
 
-export const getCounterState = (state: AppState) => state.counter;
+// Counter state
+export const getCounterState = createSelector(
+  getAllCounterState,
+  (state: CounterState) => state.counter
+);
 
-// export const getCounterListState = (state: AppState) => state.counterList;
-
-export const getCounter = createSelector(getCounterState, (state) => state.data);
-
-export const getCounterList = createSelector(getCounterState, (state) => state.list);
+export const getCounterData = createSelector(
+  getCounterState,
+  fromCounter.getCounterData
+);

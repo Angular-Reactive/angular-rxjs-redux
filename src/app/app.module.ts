@@ -11,23 +11,33 @@ import { ProductsModule } from './components/products/products.module';
 import { CounterModule } from './components/counter/counter.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserModule } from './components/user/user.module';
+import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } from '@ngrx/router-store';
+import { RouterModule } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { TestingComponent } from './testing.component';
+
+import { reducers, CustomSerializer } from './store/state/reducers/index';
 
 export const metaReducers: MetaReducer<any>[] =
 !environment.production ? [storeFreeze] : [];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestingComponent
   ],
   imports: [
-BrowserModule,
+
+  BrowserModule,
+    RouterModule,
     CommonModule,
     FormsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers),
+    RouterModule.forRoot([{ path: 'testing', component: TestingComponent }]),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 50
     }),
@@ -37,7 +47,7 @@ BrowserModule,
     ProductsModule,
     UserModule
   ],
-  providers: [],
+  providers: [ { provide: RouterStateSerializer, useClass: CustomSerializer}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

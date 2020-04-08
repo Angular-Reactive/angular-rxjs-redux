@@ -1,4 +1,4 @@
-import { AppState } from './../state/app-state';
+import { AppState } from '../state';
 import { Action,  } from '@ngrx/store';
 
 export function counterReducer1(state = 0, action: Action): number {

@@ -1,4 +1,4 @@
-import { AppState } from 'src/app/store/state/app-state';
+import { AppState } from 'src/app/store/state';
 import { environment } from './../../../environments/environment';
 import { MetaReducer, ActionReducer } from '@ngrx/store';
 

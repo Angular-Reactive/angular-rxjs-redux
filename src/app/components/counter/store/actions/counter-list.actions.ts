@@ -7,9 +7,12 @@ export enum ActionTypes {
 
 export class AddItemAction implements Action {
   readonly type = ActionTypes.ADD_COUNTER_ITEM;
-
-  constructor(public id: number, public texto: string) {
-
+  readonly payload: {
+    id: number,
+    texto: string
+  }
+  constructor(public itemId: number, public itemTexto: string) {
+    this.payload = {id: itemId, texto: itemTexto};
   }
 }
 
@@ -21,4 +24,3 @@ export class RemoveItemAction implements Action {
   }
 }
 
-export type CounterListActions = AddItemAction | RemoveItemAction;

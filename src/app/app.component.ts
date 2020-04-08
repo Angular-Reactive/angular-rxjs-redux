@@ -1,4 +1,4 @@
-import { AppState } from './store/state/app-state';
+import { AppState } from './store/state';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 

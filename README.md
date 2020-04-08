@@ -73,3 +73,63 @@ Having an 'index.ts' file helps other developers know what they should be ablle 
   }
   
 ```
+
+### @ngrx/router-store
+
+It allow us to trace where we are in the application. 'where' is represented by our route, route
+parameters, as well as by query parameters.
+We will be able to easily serialize the stores information to a storage for later retrieval and
+deserialization, which means we can re-instate the app with not only the state, but also our
+page location.
+
+## Installation and set up
+
+```
+npm i @gnrx/router-store --save
+```
+
+# Impot the correct modules and set those up in the import properties of our root module
+
+```
+import { StoreDevtoolsModule} from '@ngrx/store';
+import { StoreRouterConnectingModule, routerReducer} from '@ngrx/router-store';
+...
+imports: [
+  ...
+  StoreRouterConnectingModule.forRoot({
+    stateKey: 'router' // name of reducer key
+  })
+]
+```
+# Add Custom Router Serializer (app-state.ts)
+
+ Markup : * Create an interface that defines what we want to store about the router
+              * It can be anything that is on RouterSnapshot
+          * Create a class that will basically be the code that copies things from the
+            RouterStateSnapshot into our interface defined first ans returns that
+              * To get the code to run, you'll have to add this code to the app.module:
+
+              ```
+              imports: [
+                StoreRouterConnectingModule
+              ],
+              providers: [{provide: RouterStateSerializer, useClass: <your custom serializer class>}]
+              ```
+# Add Router Info Selectors
+
+(app-state.ts)
+```
+export const getRootReducerState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
+```
+
+(root-store.selectors.ts)
+```
+export const getRouterInfo = createSelector(
+  getRootReducerState,
+  (state) => state.state
+);
+```
+
+ Markup : * The FeatureSelector getRootReducerState is created in the index of the root state.
+          * getRouterInfo returns the RouterStateUrl interface we defined initially with the
+            url, params and queryParams.

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/state/app-state';
+import { AppState } from 'src/app/store/state';
 import * as fromUserSelectors from './store/selectors/user.selectors';
 import * as fromUserActions from './store/actions/user.actions';
 import { map, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   id = 1;
 
   // Getting the entities dictionary as a list
-  users$ = this.store.select(fromUserSelectors.getUsers).pipe(
+  users$ = this.store.select(fromUserSelectors.getUsersEntities).pipe(
     map(this.toArray)
   );
 

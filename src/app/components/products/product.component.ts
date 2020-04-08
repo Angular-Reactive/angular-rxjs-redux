@@ -1,4 +1,4 @@
-import { AppState } from 'src/app/store/state/app-state';
+import { AppState } from 'src/app/store/state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ProductsRequestAction, AdProductRequestAction } from './store/actions/product.actions';

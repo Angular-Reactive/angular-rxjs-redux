@@ -1,0 +1,6 @@
+<div *ngFor="let jedi of list$ | async">
+  {{ jedi.name }}<button (click)="remove(jedi.id)">Remove</button>
+</div>
+<input id="newJedi" type="text" [(ngModel)]="newJedi" placeholder="" />
+<button (click)="add()">Add</button>
+<button (click)="clear()">Clear</button>

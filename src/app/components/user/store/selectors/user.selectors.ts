@@ -1,4 +1,14 @@
 import { createSelector } from '@ngrx/store';
-import { getFeatureUserState } from '../index';
+import * as fromFeature from '../reducers/index';
 
-export const getUsers = createSelector(getFeatureUserState, (state)=> state.users.entities);
+export const getUserState = createSelector(
+  fromFeature.getFeatureUserState,
+  (state: fromFeature.FeatureUser) => state.users
+);
+
+export const getUsersEntities = createSelector(
+  getUserState,
+  (users) => users.entities
+);
+
+

@@ -1,5 +1,6 @@
-import { Counter } from './../../model/counter.model';
-import * as fromCounterList from '../actions/counter-list.actions';
+import * as fromCounterList from '../actions/index';
+import { Counter } from '../../model/counter.model';
+import { ActionTypes } from '../actions/counter-list.actions';
 
 
 export interface CounterListState  {
@@ -11,14 +12,14 @@ const initialState: CounterListState = {list: []};
 export function counterListReducer(state = initialState, action: fromCounterList.CounterListActions): CounterListState {
 
   switch (action.type) {
-    case fromCounterList.ActionTypes.ADD_COUNTER_ITEM:
-      const item = new Counter(action.id, action.texto);
+    case ActionTypes.ADD_COUNTER_ITEM:
+      const item = new Counter(action.payload.id, action.payload.texto);
       return ({
         ...state,
         list: [...state.list, item]
       });
 
-    case fromCounterList.ActionTypes.REMOVE_COUNTER_ITEM:
+    case ActionTypes.REMOVE_COUNTER_ITEM:
       console.log('Item id: ', action.id);
       return ({
         ...state,
@@ -30,3 +31,5 @@ export function counterListReducer(state = initialState, action: fromCounterList
       return state;
   }
 }
+
+export const getCounterList = (state: CounterListState) => state.list;

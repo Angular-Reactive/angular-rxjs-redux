@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Counter } from '../../model/counter.model';
 
 export enum ActionTypes {
   INCREMENT = '[Counter] Increment',
@@ -7,14 +8,19 @@ export enum ActionTypes {
 
 export class IncrementAction implements Action {
   readonly type = ActionTypes.INCREMENT;
+  readonly payload: number;
 
-  constructor() {}
+  constructor(value: number) {
+    this.payload = value;
+  }
 }
 
 export class DecrementAction implements Action {
   readonly type = ActionTypes.DECREMENT;
+  readonly payload: number;
 
-  constructor() {}
+  constructor(payload: number) {
+    this.payload = payload;
+  }
 }
 
-export type CounterActions = IncrementAction | DecrementAction;
