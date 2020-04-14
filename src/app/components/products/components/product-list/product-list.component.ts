@@ -3,7 +3,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../model/product.model';
+import { Product } from '../../model/index';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +12,7 @@ import { Product } from '../model/product.model';
 })
 export class ProductListComponent implements OnInit {
 
-  @Input() products: Observable<Product []>;
+  @Input() products: Observable<Product[]>;
 
   constructor() { }
 

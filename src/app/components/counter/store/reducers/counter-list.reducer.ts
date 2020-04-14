@@ -1,4 +1,4 @@
-import * as fromCounterList from '../actions/index';
+import { CounterListActions } from '../index';
 import { Counter } from '../../model/counter.model';
 import { ActionTypes } from '../actions/counter-list.actions';
 
@@ -9,7 +9,8 @@ export interface CounterListState  {
 
 const initialState: CounterListState = {list: []};
 
-export function counterListReducer(state = initialState, action: fromCounterList.CounterListActions): CounterListState {
+export function counterListReducer(state = initialState,
+      action: CounterListActions.Actions): CounterListState {
 
   switch (action.type) {
     case ActionTypes.ADD_COUNTER_ITEM:

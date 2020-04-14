@@ -8,7 +8,8 @@ export enum ProductActionTypes {
   FETCHING_PRODUCTS_FAILURE = '[Product] Fetching products failure',
   ADD_PRODUCT_REQUEST = '[Product] Add product request',
   ADD_PRODUCT_SUCCESS = '[Product] Add product success',
-  ADD_PRODUCT_FAILURE = '[Product] Add product failure'
+  ADD_PRODUCT_FAILURE = '[Product] Add product failure',
+  GO_TO_PRODUCTS = '[Product] Navigation products',
 }
 
 export class ProductsRequestAction implements Action {
@@ -61,6 +62,15 @@ export class AddProductErrorAction implements Action {
 
   constructor(public error: string) {
     this.payload = error;
+  }
+}
+
+export class GoToProductsAction implements Action {
+  readonly type = ProductActionTypes.GO_TO_PRODUCTS;
+  readonly payload: { url: '/products', query: { page: number } }
+
+  constructor(public route: { url: '/products', query: { page: number } }) {
+    this.payload = route;
   }
 }
 

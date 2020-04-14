@@ -12,32 +12,31 @@ import { CounterModule } from './components/counter/counter.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserModule } from './components/user/user.module';
 import { StoreRouterConnectingModule, RouterStateSerializer, routerReducer } from '@ngrx/router-store';
-import { RouterModule } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { TestingComponent } from './testing.component';
 
-import { reducers, CustomSerializer } from './store/state/reducers/index';
+import { reducers, CustomSerializer } from './store/reducers/index';
+import { AppRoutingModule } from './app-routing.module';
 
 export const metaReducers: MetaReducer<any>[] =
 !environment.production ? [storeFreeze] : [];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TestingComponent
+    AppComponent
   ],
   imports: [
-
-  BrowserModule,
-    RouterModule,
+    BrowserModule,
     CommonModule,
     FormsModule,
     StoreModule.forRoot(reducers),
-    RouterModule.forRoot([{ path: 'testing', component: TestingComponent }]),
-    StoreRouterConnectingModule.forRoot(),
+    AppRoutingModule,
+    StoreRouterConnectingModule.forRoot( {
+      stateKey: 'router'
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 50
     }),
@@ -45,7 +44,7 @@ export const metaReducers: MetaReducer<any>[] =
     JediModule,
     CounterModule,
     ProductsModule,
-    UserModule
+    UserModule,
   ],
   providers: [ { provide: RouterStateSerializer, useClass: CustomSerializer}],
   bootstrap: [AppComponent]

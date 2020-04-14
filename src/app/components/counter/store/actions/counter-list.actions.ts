@@ -24,3 +24,4 @@ export class RemoveItemAction implements Action {
   }
 }
 
+export type Actions = AddItemAction | RemoveItemAction;

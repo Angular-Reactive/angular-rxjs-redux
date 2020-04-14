@@ -1,5 +1,4 @@
-import * as fromCounterListActions from '../../store/actions/index';
-import * as fromCounterListSelectors from '../../store/selectors/index';
+import { CounterListActions, CounterListSelectors } from '../../store//index';
 import { Counter } from '../../model/counter.model';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store/state';
@@ -21,16 +20,16 @@ export class CounterListComponent implements OnInit {
 
   ngOnInit(): void {
     this.counter = 0;
-    this.list$ = this.store.select(fromCounterListSelectors.counterListSelector);
+    this.list$ = this.store.select(CounterListSelectors.getCounterListData);
    }
 
   add() {
-    this.store.dispatch(new fromCounterListActions.AddItem(this.counter++, this.newItem));
+    this.store.dispatch(new CounterListActions.AddItemAction(this.counter++, this.newItem));
     this.newItem = '';
   }
 
   remove(id) {
-    this.store.dispatch(new fromCounterListActions.RemoveItem(id));
+    this.store.dispatch(new CounterListActions.RemoveItemAction(id));
   }
 
 }

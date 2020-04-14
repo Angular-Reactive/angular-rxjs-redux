@@ -1,17 +1,16 @@
-<!--
-
-<app-products></app-products>-->
-
-<app-counter></app-counter><br><br>
-
-<h2>Counter List</h2>
-<app-counter-list></app-counter-list><br><br>
-
-<app-jedi-list></app-jedi-list><br><br>
-<app-user></app-user>
-
-<div>
-  <a routerLink="/testing" routerLinkActive="active">Testing</a>
+<div class="row">
+  <div class="col-sm-2">
+    <a routerLink="counter">Counter</a>
+  </div>
+  <div class="col-sm-2">
+    <a routerLink="jedi">Jedi</a>
+  </div>
+  <div class="col-sm-2">
+    <a routerLink="products">Products</a>
+  </div>
+  <div class="col-sm-2">
+    <a routerLink="user">User</a>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

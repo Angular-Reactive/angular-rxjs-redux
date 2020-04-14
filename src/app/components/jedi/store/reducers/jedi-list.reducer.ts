@@ -1,4 +1,4 @@
-import * as fromJedi from '../actions/index';
+import { JediListActions } from '../index';
 import { Action } from '@ngrx/store';
 import { Jedi } from '../../../../model/jedi.model';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
@@ -20,7 +20,7 @@ const initialState: State = {
 
 const initial: State =  jediAdapter.getInitialState(initialState);
 
-export function jediListReducer(state = initial, action: fromJedi.JediActions): State {
+export function jediListReducer(state = initial, action: JediListActions.JediActions): State {
 
   switch (action.type) {
     case JediActionTypes.ADD_JEDI:

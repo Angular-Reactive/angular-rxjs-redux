@@ -1,6 +1,8 @@
 import { AppState } from './store/state';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { getRouterState } from './store/index';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,10 @@ export class AppComponent {
   counter$;
 
   constructor(private store: Store<AppState>) {
-    this.counter$ = store.select('counter');
+    const routing$: Observable<any> = store.select(getRouterState);
+
+    routing$.subscribe(
+      (state) => console.log('router obj: ', state)
+    );
   }
-
-
 }

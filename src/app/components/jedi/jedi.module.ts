@@ -7,15 +7,16 @@ import { StoreModule } from '@ngrx/store';
 // Components
 import { JediListComponent } from './containers/jedi-list.component';
 import { jediListReducer } from './store/reducers/jedi-list.reducer';
-import { jediReducers } from './store';
+import { jediReducers } from './store/reducers';
+import { JediRoutingModule } from './jedi-routing.module';
 
 @NgModule({
-  declarations: [JediListComponent],
   imports: [
     CommonModule,
     FormsModule,
-    StoreModule.forFeature('jediList', jediReducers)
+    StoreModule.forFeature('jediList', jediReducers),
+    JediRoutingModule
   ],
-  exports: [JediListComponent]
+  declarations: [JediListComponent]
 })
 export class JediModule { }

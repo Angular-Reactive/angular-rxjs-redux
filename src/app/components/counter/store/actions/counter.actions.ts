@@ -24,3 +24,4 @@ export class DecrementAction implements Action {
   }
 }
 
+export type Actions = IncrementAction | DecrementAction;

@@ -1,6 +1,12 @@
 [
   {
     "id": 1,
-    "name": "Yoda"
+    "name": "Yoda",
+    "description": "Jedi Yoda"
+  },
+  {
+    "id": 2,
+    "name": "Skywalker",
+    "description": "Another Jedi"
   }
 ]

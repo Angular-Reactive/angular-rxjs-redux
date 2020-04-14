@@ -1,12 +1,6 @@
-import * as fromJedi from './reducers/jedi-list.reducer';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import * as JediListActions from './actions/jedi-list-actions';
+import * as JediListSelectors from './selectors/jedi.selectors';
 
-export interface FeatureJedi {
-  jedis: fromJedi.State;
-}
-
-export const jediReducers: ActionReducerMap<FeatureJedi> = {
-  jedis: fromJedi.jediListReducer
-}
-
-export const getFeatureJediState = createFeatureSelector<FeatureJedi>('jediList');
+export { JediListActions };
+export { JediListSelectors };
+export * from './reducers';

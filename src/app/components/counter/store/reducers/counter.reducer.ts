@@ -1,4 +1,4 @@
-import * as fromCounter from '../actions/index';
+import { CounterActions } from '../index';
 import { ActionTypes } from '../actions/counter.actions';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Counter } from '../../model/counter.model';
@@ -13,7 +13,7 @@ const initialState: State = {
 };
 
 
-export function counterReducer(state = initialState, action: fromCounter.CounterActions): State {
+export function counterReducer(state = initialState, action: CounterActions.Actions): State {
 
   switch (action.type) {
     case ActionTypes.INCREMENT:

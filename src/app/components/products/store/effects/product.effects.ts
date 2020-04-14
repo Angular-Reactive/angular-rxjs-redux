@@ -1,4 +1,4 @@
-import * as fromProduct from './../actions/product.actions';
+import { ProductActions } from '../index';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 import { switchMap, delay, map, catchError, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../../model/product.model';
+import { ProductsHttpActions } from '../actions/products-http-actions';
+import { Router } from '@angular/router';
 
 // The effect is just a class decorated with the @Injectable decorator.
 // It also contains two members: one member of 'Actions' type and another
@@ -19,26 +21,24 @@ import { Product } from '../../model/product.model';
 export class ProductEffects {
 
   constructor(private actions$: Actions<Action>,
-              private http: HttpClient) {}
+              private srv: ProductsHttpActions,
+              private router: Router) {}
 
-  @Effect()
-  getProducts$ = this.actions$.pipe(
-    ofType(fromProduct.ProductActionTypes.FETCHING_PRODUCTS_REQUEST),
-    switchMap(() =>
-      this.http.get('../../../../../assets/data/products.json').pipe(
-        delay(3000),
-        map((payload: Product []) => new fromProduct.ProductsFetchSuccessfullyAction(payload)),
-        catchError(err => of(new fromProduct.ProductsFetchErrorAction(err))
-      ))
-  ));
+   @Effect()
+   productAdd$: Observable<Action> = this.actions$.pipe(
+     ofType(ProductActions.ProductActionTypes.ADD_PRODUCT_REQUEST),
+     switchMap(action => this.srv.addProduct(action))
+   );
 
-  @Effect()
-  addProduct$ = this.actions$.pipe(
-    ofType(fromProduct.ProductActionTypes.ADD_PRODUCT_REQUEST),
-    switchMap((action: fromProduct.AdProductRequestAction) =>
-      this.http.post('products/', action.payload).pipe(
-        map((payload: Product) => new fromProduct.AddProductSuccessfullyAction(payload)),
-        catchError(err => of(new fromProduct.AddProductErrorAction(err)))
-      ))
-  );
+   @Effect()
+   products$: Observable<Action> = this.actions$.pipe(
+    ofType(ProductActions.ProductActionTypes.FETCHING_PRODUCTS_REQUEST),
+    switchMap(action => this.srv.fetchProducts())
+   );
+
+   @Effect({ dispatch: false })
+   routingProductsS = this.actions$.pipe(
+     ofType(ProductActions.ProductActionTypes.GO_TO_PRODUCTS),
+     tap(action => this.router.navigate(['/products']))
+   );
 }

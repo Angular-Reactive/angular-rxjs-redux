@@ -1,11 +1,7 @@
-import * as fromCounterSelectors from '../../store/selectors/index';
+import { CounterActions, CounterSelectors } from '../../store//index';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import * as fromCounterActions from '../../store/actions/index';
 import * as fromStore from 'src/app/store/state';
-import { Observable } from 'rxjs';
-import { getCounterData } from '../../store/reducers/counter.reducer';
-import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-counter',
@@ -20,15 +16,16 @@ export class CounterComponent implements OnInit {
   constructor(private store: Store<fromStore.AppState>) {}
 
   ngOnInit(): void {
-    this.counter$ = this.store.select(fromCounterSelectors.counterDataSelector);
+    this.counter$ = this.store.select(CounterSelectors.getCounterData);
   }
 
   increment() {
-    this.store.dispatch(new fromCounterActions.IncrementCounter(this.counter++));
+    // this.store.dispatch(new fromCounterActions.IncrementCounter(this.counter++));
+    this.store.dispatch(new CounterActions.IncrementAction(this.counter++));
   }
 
   decrement() {
-    const action = new fromCounterActions.DecrementCounter(this.counter--);
+    const action = new CounterActions.DecrementAction(this.counter--);
     this.store.dispatch(action);
   }
 
